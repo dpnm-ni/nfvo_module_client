@@ -1,18 +1,18 @@
-# nfvo_client.SfcrApi
+# nfvo_client.VnfApi
 
 All URIs are relative to *http://localhost*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**add_sfcr**](SfcrApi.md#add_sfcr) | **POST** /sfcrs | Add new SFC request. id field is optional
-[**del_sfcr**](SfcrApi.md#del_sfcr) | **DELETE** /sfcrs/{id} | Delete a sfcr.
-[**get_sfcrs**](SfcrApi.md#get_sfcrs) | **GET** /sfcrs | Get currently active SFC requests.
+[**deploy_vnf**](VnfApi.md#deploy_vnf) | **POST** /vnfs | Instantiate an instance of a VNF flavor on a given node.
+[**destroy_vnf**](VnfApi.md#destroy_vnf) | **DELETE** /vnfs/{id} | Destroy a VNF instance.
+[**shutdown_vnf**](VnfApi.md#shutdown_vnf) | **POST** /vnfs/{id}/shutdown | Shut down a VNF instance.
 
 
-# **add_sfcr**
-> str add_sfcr(body)
+# **deploy_vnf**
+> str deploy_vnf(body)
 
-Add new SFC request. id field is optional
+Instantiate an instance of a VNF flavor on a given node.
 
 
 
@@ -25,22 +25,22 @@ from nfvo_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = nfvo_client.SfcrApi()
-body = nfvo_client.SFCR() # SFCR | SFC request object to be added.
+api_instance = nfvo_client.VnfApi()
+body = nfvo_client.Body() # Body | Flavor of VNF instance to be deployed as well as the target node. vnf_name is optional
 
 try:
-    # Add new SFC request. id field is optional
-    api_response = api_instance.add_sfcr(body)
+    # Instantiate an instance of a VNF flavor on a given node.
+    api_response = api_instance.deploy_vnf(body)
     pprint(api_response)
 except ApiException as e:
-    print("Exception when calling SfcrApi->add_sfcr: %s\n" % e)
+    print("Exception when calling VnfApi->deploy_vnf: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **body** | [**SFCR**](SFCR.md)| SFC request object to be added. | 
+ **body** | [**Body**](Body.md)| Flavor of VNF instance to be deployed as well as the target node. vnf_name is optional | 
 
 ### Return type
 
@@ -57,10 +57,10 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **del_sfcr**
-> del_sfcr(id)
+# **destroy_vnf**
+> destroy_vnf(id)
 
-Delete a sfcr.
+Destroy a VNF instance.
 
 
 
@@ -73,21 +73,21 @@ from nfvo_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = nfvo_client.SfcrApi()
-id = 'id_example' # str | route id
+api_instance = nfvo_client.VnfApi()
+id = 'id_example' # str | vnf id
 
 try:
-    # Delete a sfcr.
-    api_instance.del_sfcr(id)
+    # Destroy a VNF instance.
+    api_instance.destroy_vnf(id)
 except ApiException as e:
-    print("Exception when calling SfcrApi->del_sfcr: %s\n" % e)
+    print("Exception when calling VnfApi->destroy_vnf: %s\n" % e)
 ```
 
 ### Parameters
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **id** | **str**| route id | 
+ **id** | **str**| vnf id | 
 
 ### Return type
 
@@ -104,10 +104,10 @@ No authorization required
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to Model list]](../README.md#documentation-for-models) [[Back to README]](../README.md)
 
-# **get_sfcrs**
-> list[SFCR] get_sfcrs()
+# **shutdown_vnf**
+> shutdown_vnf(id)
 
-Get currently active SFC requests.
+Shut down a VNF instance.
 
 
 
@@ -120,22 +120,25 @@ from nfvo_client.rest import ApiException
 from pprint import pprint
 
 # create an instance of the API class
-api_instance = nfvo_client.SfcrApi()
+api_instance = nfvo_client.VnfApi()
+id = 'id_example' # str | ID of VNF instance to be shut down.
 
 try:
-    # Get currently active SFC requests.
-    api_response = api_instance.get_sfcrs()
-    pprint(api_response)
+    # Shut down a VNF instance.
+    api_instance.shutdown_vnf(id)
 except ApiException as e:
-    print("Exception when calling SfcrApi->get_sfcrs: %s\n" % e)
+    print("Exception when calling VnfApi->shutdown_vnf: %s\n" % e)
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **id** | **str**| ID of VNF instance to be shut down. | 
 
 ### Return type
 
-[**list[SFCR]**](SFCR.md)
+void (empty response body)
 
 ### Authorization
 
